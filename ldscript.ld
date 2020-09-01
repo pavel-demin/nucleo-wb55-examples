@@ -6,7 +6,7 @@ _stack_end = ORIGIN(sram) + LENGTH(sram);
 
 MEMORY {
   flash (rx) : o = 0x08000000, l = 512k
-  sram (wx) : o = 0x20000004, l = 192k - 4
+  sram (wx) : o = 0x20000000, l = 192k
 }
 
 SECTIONS {
