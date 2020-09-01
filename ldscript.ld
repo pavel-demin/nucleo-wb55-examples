@@ -7,6 +7,7 @@ _stack_end = ORIGIN(sram) + LENGTH(sram);
 MEMORY {
   flash (rx) : o = 0x08000000, l = 512k
   sram (wx) : o = 0x20000000, l = 192k
+  shared (wx) : o = 0x20030000, l = 10k
 }
 
 SECTIONS {
@@ -39,4 +40,18 @@ SECTIONS {
     . = ALIGN(4);
     _bss_end = .;
   } >sram
+
+  MAPPING_TABLE (NOLOAD) : {
+    * (MAPPING_TABLE)
+  } >shared
+
+  MB_MEM1 (NOLOAD) : {
+    * (MB_MEM1)
+  } >shared
+
+  MB_MEM2 (NOLOAD) : {
+    _MB_MEM2_start = .;
+    * (MB_MEM2);
+    _MB_MEM2_end = .;
+  } >shared
 }
